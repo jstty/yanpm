@@ -1,6 +1,6 @@
 {
   "name": "yanpm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Yet Another Node Plugin/Package Manager",
   "keywords": [
     "node.js",
@@ -9,13 +9,17 @@
     "package manager",
     "npm"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jstty/yanpm.git"
+  },
+  "license": {
+    "type": "MIT"
+  },
   "author": {
     "name": "Joseph E. Sutton",
     "email": "joe@jstty.com",
     "web": "http://www.jstty.com"
-  },
-  "license": {
-    "type": "MIT"
   },
   "dependencies": {
     "npm": "^2.7.1",
