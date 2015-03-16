@@ -1,0 +1,24 @@
+{
+  "name": "yanpm",
+  "version": "0.1.0",
+  "description": "Yet Another Node Plugin/Package Manager",
+  "keywords": [
+    "node.js",
+    "javascript",
+    "plugin",
+    "package manager",
+    "npm"
+  ],
+  "author": {
+    "name": "Joseph E. Sutton",
+    "email": "joe@jstty.com",
+    "web": "http://www.jstty.com"
+  },
+  "license": {
+    "type": "MIT"
+  },
+  "dependencies": {
+    "npm": "^2.7.1",
+    "q": "^1.2.0"
+  }
+}
