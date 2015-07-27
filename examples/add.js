@@ -11,49 +11,68 @@ var startTime = process.hrtime();
 console.log("Loading...");
 ya
     .add("lodash")
-    .add("lodash@3.5.0")
-    .add("_", "lodash@3.5.0")
-    .add("util", "_", "lodash@3.5.0")
+    .add("_", "lodash@3.10.0")        // in this case, it will use the first added module version
+    .add("util", "_", "lodash@3.8.0") // in this case, it will use the first added module version
+
     .add({
-        "name": "logger",
-        "group": "util",
-        "package": "stumpy@0.6.x"
-        ,"type": "factory" // default "singleton"
+        "util": "lodash"
     })
-    .add(['moment', 'when'])
     .add({
-        "name": "basic-auth",
-        "group": "route",
-        "packages": "basic-auth",
-        "dependencies": {
-            "http": "express"
-        },
-        "route": {
-            "setup": function(app, method, routeStr, func, options){
-                var auth = function (req, res, next) {
-                    function unauthorized(res) {
-                        res.set('WWW-Authenticate', 'Basic realm='+(options.message || 'Authorization Required') );
-                        return res.send(401);
+        "util": {
+            "logger2": {
+                "package": "stumpy",
+                "type": "factory", // default "singleton"
+                "args": [
+                    "Logger2",
+                    {
+                        showTrace: true
                     }
-
-                    var user = basicAuth(req);
-                    if (!user || !user.name || !user.pass) {
-                        return unauthorized(res);
-                    }
-
-                    if ( user.name === options.user &&
-                        user.pass === options.pass ) {
-                        return next();
-                    } else {
-                        return unauthorized(res);
-                    }
-                };
-
-                app[ method ](routeStr, auth, func);
+                ]
             }
         }
     })
+
+    .add(['moment', 'numeral'])
+    .add([{
+        "group": "util",
+        "name": "logger1",
+        "package": "stumpy@0.6.x",
+        "type": "factory" // default "singleton"
+    }])
+    //.add([{
+    //    "group": "route",
+    //    "name":  "basicAuth",
+    //    "packages": "basic-auth",
+    //    // dependencies, load first and are added
+    //    "dependencies": { "http": "express" }, // or [ "express" ] if in group "*"
+    //    "route": {
+    //        "setup": function(app, method, routeStr, func, options){
+    //            var auth = function (req, res, next) {
+    //                function unauthorized(res) {
+    //                    res.set('WWW-Authenticate', 'Basic realm='+(options.message || 'Authorization Required') );
+    //                    return res.send(401);
+    //                }
+    //
+    //                var user = basicAuth(req);
+    //                if (!user || !user.name || !user.pass) {
+    //                    return unauthorized(res);
+    //                }
+    //
+    //                if ( user.name === options.user &&
+    //                    user.pass === options.pass ) {
+    //                    return next();
+    //                } else {
+    //                    return unauthorized(res);
+    //                }
+    //            };
+    //
+    //            app[ method ](routeStr, auth, func);
+    //        }
+    //    }
+    //}])
+    // require plugins
     .load()
+    // all done with requires
     .done(function(plugins){
         console.log('Done loading plugins');
 
@@ -70,6 +89,24 @@ ya
         var _3 = plugins.get('util', '_');
         console.log("lodash 3 version:", _3.VERSION);
 
-        var logger = plugins.get('util', 'logger');
-        logger.log('Stumpy logger');
+        var _4 = plugins.get('util', 'lodash');
+        console.log("lodash 4 version:", _4.VERSION);
+
+        var logger1 = plugins.get('util', 'logger1');
+        logger1.log('Stumpy logger 1');
+
+        var logger2 = plugins.get('util', 'logger2');
+        logger2.log('Stumpy logger 2');
+
+        // pass args to factory
+        var logger1New = plugins.get('util', 'logger1', ["logger1New", { showLogId: true, showLogType: true} ]);
+        logger1New.log('Stumpy logger 1 new');
+
+        var moment = plugins.get('moment');
+        logger1New.log('moment time:', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
+
+        var numeral = plugins.get('numeral');
+        logger1New.log('numeral time diff:', numeral(diffSeconds).format('0,0.00'));
+
+        process.exit();
     });

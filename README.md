@@ -1,16 +1,21 @@
-yanpm - Yet Another Node Plugin/Package Manager
+# yanpm - Yet Another Node Plugin/Package Manager
+==========================
+![License](https://img.shields.io/npm/l/yanpm.svg)
+
+[![Dependency Status](https://david-dm.org/jstty/yanpm.png?theme=shields.io)](https://david-dm.org/jstty/yanpm) 
+[![NPM](https://nodei.co/npm/yanpm.png)](https://nodei.co/npm/yanpm/)
 ==========================
 
 ## Description
-Gives your node app/server the "Ya" that it needs!
+Gives your node app/server the "Ya!" that it needs!
 
 ## Better Description
-Config based Plugin manager to load dependaces are run time.
-This allows for frameworks (e.g. Hyper.io) to have default core plugins that swapped out later but without the bloat.
+Config based Plugin manager to load dependencies at run time.
+This allows for frameworks (e.g. Hyper.io) to have default core plugins that swapped out later but without added bloat.
 
 # TODO
-[ ] Better Readme
-[ ] Hide/Handle NPM console message
+    [ ] Better Readme
+    [ ] Hide/Handle NPM console message
 
 # Basic usage
 ```javascript
@@ -23,6 +28,7 @@ plugin
         var _ = plugins.get('lodash');
         console.log("lodash version:", _.VERSION);
     });
+```
 
 # More complex usage:
 ```javascript
@@ -32,36 +38,81 @@ plugin
     .add("template", "handlebars", "hyper.io-handlebars");
 
 plugin
-    .add({
+    .add([{
          "name": "logger",
          "group": "util",
          "package": "stumpy@0.6.x"
          ,"type": "factory" // default "singleton"
-     });
+     }]);
+```
 
-// ??? should it be supported?
+# Other Supported Formats:
+```javascript
 plugin
-    .add({
-        "util": {
-            "logger":  "stumpy@0.6.x",
-            "config":  "transfuser@0.2.x",
-            "stats":   "statsd",
-            "runner":  "forever": "*"
-        }
-        "template": {
-            "ejs": "hyper.io-ejs": "*",
-            "handlebars": "hyper.io-handlebars": "*"
-        },
-        "http": {
-            "express":  "hyper.io-express@0.1.x"
-        },
-        "middlware": {
-            "auth":     "hyper.io-express-auth-basic",
-            "validate": "hyper.io-express-validate",
-        }
-    });
+     .add("lodash") // get latest
+    
+     .add("lodash@3.5.0") // get specific version
+    
+     .add("_", "lodash@3.5.0")
+    
+     .add("util", "_", "lodash@3.5.0")
+    
+     .add("util", ["lodash", "moment"])
+     .add("util", [{
+         "name": "logger1",
+         "package": "stumpy@0.6.x",
+         "type": "factory" // default "singleton"
+     }])
+     .add("util", { "logger2": {
+         "package": "stumpy",
+         "type": "factory", // default "singleton"
+         "arguments": [
+             "Logger2",
+             {
+                 showTrace: true,
+                 showLogId: true,
+                 showLogType: true
+             }
+         ]
+     })
+    
+     .add(["lodash", "moment"])
+     .add([
+         {
+            "group": "util",
+            "name": "logger1",
+            "package": "stumpy@0.6.x",
+            "type": "factory" // default "singleton"
+         }
+     ])
+    
+     .add({
+        "util": "lodash"
+     })
+     .add({
+        "util": [ "lodash" ]
+     })
+    
+     .add({
+         "util": {
+             "logger2": {
+                 "package": "stumpy",
+                 "type": "factory", // default "singleton"
+                 "arguments": [
+                     "Logger2",
+                     {
+                         showTrace: true,
+                         showLogId: true,
+                         showLogType: true
+                     }
+                 ]
+             }
+         }
+     });
+```
 
-
+# Even more examples:
+```javascript
 plugin
     .add([
     {
