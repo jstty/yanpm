@@ -14,6 +14,7 @@ Config based Plugin manager to load dependencies at run time.
 This allows for frameworks (e.g. Hyper.io) to have default core plugins that swapped out later but without added bloat.
 
 # TODO
+    [ ] Tests
     [ ] Better Readme
     [ ] Hide/Handle NPM console message
 
