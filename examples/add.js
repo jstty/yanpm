@@ -9,6 +9,7 @@ var ya  = new yanpm();
 var startTime = process.hrtime();
 
 console.log("Loading...");
+
 ya
     .add("lodash")
     .add("_", "lodash@3.10.0")        // in this case, it will use the first added module version
@@ -34,10 +35,16 @@ ya
 
     .add(['moment', 'numeral'])
     .add([{
-        "group": "util",
-        "name": "logger1",
+        "group":   "util",
+        "name":    "logger1",
         "package": "stumpy@0.6.x",
-        "type": "factory" // default "singleton"
+        "type":    "factory" // default "singleton"
+    }])
+    .add([{
+        "group":   "logger",
+        "package": "stumpy",
+        "type":    "factory",
+        "default": true
     }])
     //.add([{
     //    "group": "route",
@@ -98,9 +105,16 @@ ya
         var logger2 = plugins.get('util', 'logger2');
         logger2.log('Stumpy logger 2');
 
+        var logger3 = plugins.getDefault('logger');
+        logger3.log('Stumpy logger 3');
+
         // pass args to factory
         var logger1New = plugins.get('util', 'logger1', ["logger1New", { showLogId: true, showLogType: true} ]);
         logger1New.log('Stumpy logger 1 new');
+
+        plugins.setDefault('util', 'logger2');
+        var logger2New = plugins.getDefault('util');
+        logger2New.log('Stumpy logger2New');
 
         var moment = plugins.get('moment');
         logger1New.log('moment time:', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
