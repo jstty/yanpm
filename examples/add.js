@@ -112,9 +112,15 @@ ya
         var logger1New = plugins.get('util', 'logger1', ["logger1New", { showLogId: true, showLogType: true} ]);
         logger1New.log('Stumpy logger 1 new');
 
+
+        var loggers = plugins.getAll('util');
+        loggers.logger1.log('Stumpy logger 1 new new');
+
+
         plugins.setDefault('util', 'logger2');
         var logger2New = plugins.getDefault('util');
-        logger2New.log('Stumpy logger2New');
+        logger2New.log('Stumpy logger 2 new');
+
 
         var moment = plugins.get('moment');
         logger1New.log('moment time:', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
