@@ -44,8 +44,8 @@ plugin
     .add([{
          "name": "logger",
          "group": "util",
-         "package": "stumpy@0.6.x"
-         ,"type": "factory" // default "singleton"
+         "package": "stumpy@0.6.x",
+         "factory": function (Stumpy) { return new Stumpy(); }
      }]);
 ```
 
@@ -64,11 +64,11 @@ plugin
      .add("util", [{
          "name": "logger1",
          "package": "stumpy@0.6.x",
-         "type": "factory" // default "singleton"
+         "factory": function (Stumpy) { return new Stumpy(); }
      }])
      .add("util", { "logger2": {
          "package": "stumpy",
-         "type": "factory", // default "singleton"
+         "factory": function (Stumpy) { return new Stumpy(); },
          "arguments": [
              "Logger2",
              {
@@ -85,7 +85,7 @@ plugin
             "group": "util",
             "name": "logger1",
             "package": "stumpy@0.6.x",
-            "type": "factory" // default "singleton"
+            "factory": function (Stumpy) { return new Stumpy(); }
          }
      ])
     
@@ -100,7 +100,7 @@ plugin
          "util": {
              "logger2": {
                  "package": "stumpy",
-                 "type": "factory", // default "singleton"
+                 "factory": function (Stumpy) { return new Stumpy(); },
                  "arguments": [
                      "Logger2",
                      {
@@ -122,8 +122,15 @@ plugin
         "name": "logger",
         "group": "util",
         "package": "stumpy@0.6.x",
-        "type": "factory"
-    },
+        "factory": function (Stumpy) { return new Stumpy(); }
+    }
+    ]);
+```
+
+# Roadmap features
+```javascript
+plugin
+    .add([
     {
         "name": "basic-auth",
         "group": "route",
