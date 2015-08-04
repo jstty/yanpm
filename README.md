@@ -1,8 +1,10 @@
 # yanpm - Yet Another Node Plugin/Package Manager
-==========================
-![License](https://img.shields.io/npm/l/yanpm.svg)
+[![Build Status](https://secure.travis-ci.org/jstty/yanpm.png?branch=master)](http://travis-ci.org/jstty/yanpm)
+[![bitHound Score](https://www.bithound.io/github/jstty/yanpm/badges/score.svg?branch=master)](https://www.bithound.io/github/jstty/yanpm)
+[![Coverage Status](https://coveralls.io/repos/jstty/yanpm/badge.svg?service=github&branch=master)](https://coveralls.io/github/jstty/yanpm?branch=master)
+![License](https://img.shields.io/npm/l/yanpm.svg?branch=master)
 
-[![Dependency Status](https://david-dm.org/jstty/yanpm.png?theme=shields.io)](https://david-dm.org/jstty/yanpm) 
+[![Dependency Status](https://david-dm.org/jstty/yanpm.png?theme=shields.io&branch=master)](https://david-dm.org/jstty/yanpm) 
 [![NPM](https://nodei.co/npm/yanpm.png)](https://nodei.co/npm/yanpm/)
 ==========================
 
@@ -11,7 +13,7 @@ Gives your node app/server the "Ya!" that it needs!
 
 ## Better Description
 Config based Plugin manager to load dependencies at run time.
-This allows for frameworks (e.g. Hyper.io) to have default core plugins that swapped out later but without added bloat.
+This allows for frameworks (e.g. yanpm) to have default core plugins that swapped out later but without added bloat.
 
 # TODO
     [ ] Tests
@@ -35,8 +37,8 @@ plugin
 ```javascript
 plugin
     .add("logger",   "stumpy@0.6.x")
-    .add("template", "ejs",        "hyper.io-ejs")
-    .add("template", "handlebars", "hyper.io-handlebars");
+    .add("template", "ejs",        "yanpm-ejs")
+    .add("template", "handlebars", "yanpm-handlebars");
 
 plugin
     .add([{

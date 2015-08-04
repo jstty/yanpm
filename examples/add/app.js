@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var yanpm = require('../index.js');
+var yanpm = require('../../index.js');
 var ya  = new yanpm();
 
 var startTime = process.hrtime();
@@ -22,7 +22,7 @@ ya
         "util": {
             "logger2": {
                 "package": "stumpy",
-                "type": "factory", // default "singleton"
+                "factory": function (Stumpy) { return new Stumpy(); },
                 "args": [
                     "Logger2",
                     {
@@ -38,12 +38,12 @@ ya
         "group":   "util",
         "name":    "logger1",
         "package": "stumpy@0.6.x",
-        "type":    "factory" // default "singleton"
+        "factory": function (Stumpy) { return new Stumpy(); }
     }])
     .add([{
         "group":   "logger",
         "package": "stumpy",
-        "type":    "factory",
+        "factory": function (Stumpy) { return new Stumpy(); },
         "default": true
     }])
     //.add([{
