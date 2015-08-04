@@ -4,7 +4,7 @@ var yanpm = require('../../index.js');
 
 var rootDir = __dirname;
 //console.log("root dir:", rootDir, "\n");
-var timeoutSec = 200;
+var timeoutSec = 500;
 
 var list = require('./tests-list.json');
 
