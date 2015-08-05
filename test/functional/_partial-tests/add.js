@@ -7,6 +7,9 @@ module.exports = [
         func: function (yanpm, done) {
             expect(yanpm).to.not.be.null;
             var ya = new yanpm();
+
+            //console.log('TEST dirname:', __dirname, ", cwd:", process.cwd());
+
             ya.add("lodash").load().done(function(){
                     var _ = ya.get('lodash');
                     expect(_).to.not.be.null;

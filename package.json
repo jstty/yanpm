@@ -28,8 +28,9 @@
     "chai": "~3.2.0",
     "coveralls": "^2.11.3",
     "istanbul": "^0.3.17",
+    "lodash": "~3.10.0",
     "mocha": "~2.2.5",
-    "lodash": "~3.10.0"
+    "shelljs": "^0.5.1"
   },
   "scripts": {
     "test": "istanbul --config=test/.istanbul.yml cover _mocha -- --check-leaks -t 5000 -b -R spec test/tests.js",
