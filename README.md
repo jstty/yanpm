@@ -4,7 +4,8 @@
 [![Coverage Status](https://coveralls.io/repos/jstty/yanpm/badge.svg?service=github&branch=master)](https://coveralls.io/github/jstty/yanpm?branch=master)
 ![License](https://img.shields.io/npm/l/yanpm.svg?branch=master)
 
-[![Dependency Status](https://david-dm.org/jstty/yanpm.png?theme=shields.io&branch=master)](https://david-dm.org/jstty/yanpm) 
+[![Dependency Status](https://david-dm.org/jstty/yanpm.png?theme=shields.io&branch=master)](https://david-dm.org/jstty/yanpm)
+[![devDependency Status](https://david-dm.org/jstty/yanpm/dev-status.png?theme=shields.io&branch=master)](https://david-dm.org/jstty/yanpm#info=devDependencies)
 [![NPM](https://nodei.co/npm/yanpm.png)](https://nodei.co/npm/yanpm/)
 ==========================
 
@@ -16,9 +17,8 @@ Config based Plugin manager to load dependencies at run time.
 This allows for frameworks (e.g. yanpm) to have default core plugins that swapped out later but without added bloat.
 
 # TODO
-    [ ] Tests
     [ ] Better Readme
-    [ ] Hide/Handle NPM console message
+    [/] Hide/Handle NPM console message
 
 # Basic usage
 ```javascript
