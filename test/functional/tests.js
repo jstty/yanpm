@@ -1,12 +1,10 @@
-var _     = require('lodash');
 var path  = require('path');
-var yanpm = require('../../index.js');
 
 require('shelljs/global');
 
 var rootDir = __dirname;
 //console.log("root dir:", rootDir, "\n");
-var timeoutSec = 500;
+var timeoutSec = 200;
 
 var list = require('./tests-list.json');
 
@@ -14,13 +12,17 @@ var list = require('./tests-list.json');
 process.setMaxListeners(0);
 
 // iterate over all test groups
-_.forEach(list, function(testList, item){
+var listKeys = Object.keys(list);
+listKeys.forEach(function(item){
+    var testList = list[item];
+
     // create group for each test
     describe(item, function() {
         this.timeout(timeoutSec * 1000);
 
         // iterate over all tests in group
-        _.forEach(testList, function(appName, name) {
+        var names = Object.keys(testList);
+        names.forEach(function(name) {
 
             describe(name, function() {
                 // create sub-group for each test
@@ -30,14 +32,26 @@ _.forEach(list, function(testList, item){
                 var tests = require(file);
                 process.chdir(dir);
 
-                beforeEach(function(){
-                    //console.log("beforeEach:", name);
-                    rm('-rf', './node_modules');
+                var yanpm = null;
+                beforeEach(function(done){
+                    // ensure cache is clear
+                    delete require.cache['../../index.js'];
+
+                    console.log("beforeEach:", name, ', cwd:', process.cwd());
+                    setTimeout(function(){
+                        yanpm = require('../../index.js');
+
+                        rm('-rf', './node_modules');
+                        done();
+                    }, timeoutSec);
                 });
 
-                afterEach(function(){
-                    //console.log("afterEach", name);
-                    rm('-rf', './node_modules');
+                afterEach(function(done){
+                    console.log("afterEach", name, ', cwd:', process.cwd());
+                    setTimeout(function(){
+                        rm('-rf', './node_modules');
+                        done();
+                    }, timeoutSec);
                 });
 
                 // iterated over all sub-tests for a single group test

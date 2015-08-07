@@ -11,11 +11,14 @@ module.exports = [
             //console.log('TEST dirname:', __dirname, ", cwd:", process.cwd());
 
             ya.add("lodash").load().done(function(){
+
                     var _ = ya.get('lodash');
                     expect(_).to.not.be.null;
                     expect(_).to.be.a('function');
                     expect(_.VERSION).to.be.a('string');
                     //console.log('VERSION:', _.VERSION);
+
+                    ya.reset();
                     if(done) done();
                 });
         }
@@ -31,6 +34,8 @@ module.exports = [
                 expect(_).to.be.a('function');
                 expect(_.VERSION).to.be.a('string');
                 //console.log('VERSION:', _.VERSION);
+
+                ya.reset();
                 if (done) done();
             });
         }
@@ -46,6 +51,8 @@ module.exports = [
                 expect(_).to.be.a('function');
                 expect(_.VERSION).to.be.a('string');
                 //console.log('VERSION:', _.VERSION);
+
+                ya.reset();
                 if (done) done();
             });
         }
@@ -405,7 +412,8 @@ module.exports = [
                 },
                 {
                     "group":   "util",
-                    "package": "moment"
+                    "name": "moment",
+                    "package": "moment@2.9.0"
                 }
             ]).load().done(function () {
                 var plugins = ya.getAll('util');
@@ -418,6 +426,8 @@ module.exports = [
                 expect(time).to.be.a('object');
                 expect(time.format()).to.equal("2011-10-31T00:00:00-07:00");
                 //console.log('time:', time.format());
+
+                ya.reset();
                 if (done) done();
             });
         }
