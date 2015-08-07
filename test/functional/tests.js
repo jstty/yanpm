@@ -37,7 +37,7 @@ listKeys.forEach(function(item){
                     // ensure cache is clear
                     delete require.cache['../../index.js'];
 
-                    console.log("beforeEach:", name, ', cwd:', process.cwd());
+                    //console.log("beforeEach:", name, ', cwd:', process.cwd());
                     setTimeout(function(){
                         yanpm = require('../../index.js');
 
@@ -47,7 +47,7 @@ listKeys.forEach(function(item){
                 });
 
                 afterEach(function(done){
-                    console.log("afterEach", name, ', cwd:', process.cwd());
+                    //console.log("afterEach", name, ', cwd:', process.cwd());
                     setTimeout(function(){
                         rm('-rf', './node_modules');
                         done();

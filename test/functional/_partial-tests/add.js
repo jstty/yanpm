@@ -88,6 +88,8 @@ module.exports = [
                 expect(_).to.be.a('function');
                 expect(_.VERSION).to.be.a('string');
                 //console.log('VERSION:', _.VERSION);
+
+                ya.reset();
                 if (done) done();
             });
         }
@@ -106,6 +108,8 @@ module.exports = [
                 expect(_).to.be.a('function');
                 expect(_.VERSION).to.be.a('string');
                 //console.log('VERSION:', _.VERSION);
+
+                ya.reset();
                 if (done) done();
             });
         }
@@ -412,20 +416,19 @@ module.exports = [
                 },
                 {
                     "group":   "util",
-                    "name": "moment",
-                    "package": "moment@2.9.0"
+                    "package": "numeral@1.5.3"
                 }
             ]).load().done(function () {
                 var plugins = ya.getAll('util');
-                var moment = plugins.moment;
+                var numeral = plugins.numeral;
 
-                expect(moment).to.not.be.null;
-                expect(moment).to.be.a('function');
+                expect(numeral).to.not.be.null;
+                expect(numeral).to.be.a('function');
 
-                var time = moment("20111031", "YYYYMMDD");
-                expect(time).to.be.a('object');
-                expect(time.format()).to.equal("2011-10-31T00:00:00-07:00");
-                //console.log('time:', time.format());
+                var num = numeral(1234);
+                expect(num).to.be.a('object');
+                expect(num.format('0,0')).to.equal("1,234");
+                //console.log('num:', num.format());
 
                 ya.reset();
                 if (done) done();
