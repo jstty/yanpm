@@ -474,5 +474,73 @@ module.exports = [
                 if(done) done();
             });
         }
+    },
+    // --------------------------------------------------------------------------
+    // Test Errors
+    // --------------------------------------------------------------------------
+    {
+        name: "callback error",
+        func: function (yanpm, done) {
+            expect(yanpm).to.not.be.null;
+            var ya = new yanpm();
+
+            ya.load(function(){
+                if(done) done();
+            });
+        }
+    },
+    {
+        name: "invalid file error",
+        func: function (yanpm, done) {
+            expect(yanpm).to.not.be.null;
+            var ya = new yanpm();
+
+            ya.add(["./_lodash-not-found.js"]).load(function(){
+                if(done) done();
+            });
+        }
+    },
+    {
+        name: "set/get errors",
+        func: function (yanpm, done) {
+            expect(yanpm).to.not.be.null;
+            var ya = new yanpm();
+
+            ya.add("./_lodash.json").load(function(){
+                ya.setDefault();
+                ya.setDefault('util');
+                ya.setDefault('util', 'stumpy');
+                ya.getDefault();
+                ya.getAll();
+
+                ya.get('lodash', ['args']);
+                ya.get('util', 'lodash', 'not-args');
+
+                ya.get('junk', 'no-plugin');
+
+                if(done) done();
+            });
+        }
+    },
+    {
+        name: "add null errors",
+        func: function (yanpm, done) {
+            expect(yanpm).to.not.be.null;
+            var ya = new yanpm();
+
+            ya.add([
+                {
+                    group: null
+                },
+                {
+                    name: null
+                },
+                {
+                    package: null
+                }
+            ]).load(function(){
+                if(done) done();
+            });
+        }
     }
 ];
