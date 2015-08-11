@@ -10,7 +10,7 @@ module.exports = [
 
             //console.log('TEST dirname:', __dirname, ", cwd:", process.cwd());
 
-            ya.add("lodash").load().done(function(){
+            ya.add("lodash").load(function(){
 
                     var _ = ya.get('lodash');
                     expect(_).to.not.be.null;
@@ -28,7 +28,7 @@ module.exports = [
         func: function (yanpm, done) {
             expect(yanpm).to.not.be.null;
             var ya = new yanpm();
-            ya.add("_", "lodash@3.9.0").load().done(function () {
+            ya.add("_", "lodash@3.9.0").load(function () {
                 var _ = ya.get('_');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
@@ -45,7 +45,7 @@ module.exports = [
         func: function (yanpm, done) {
             expect(yanpm).to.not.be.null;
             var ya = new yanpm();
-            ya.add("util", "_", "lodash@3.8.x").load().done(function () {
+            ya.add("util", "_", "lodash@3.8.x").load(function () {
                 var _ = ya.get('util', '_');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
@@ -62,7 +62,7 @@ module.exports = [
         func: function (yanpm, done) {
             expect(yanpm).to.not.be.null;
             var ya = new yanpm();
-            ya.add("util", ["lodash"]).load().done(function () {
+            ya.add("util", ["lodash"]).load(function () {
                 var _ = ya.get('util', 'lodash');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
@@ -81,7 +81,7 @@ module.exports = [
                 "_": {
                     "package": "lodash"
                 }
-            }).load().done(function () {
+            }).load(function () {
                 var _ = ya.get('util', '_');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
@@ -101,7 +101,7 @@ module.exports = [
             var ya = new yanpm();
             ya.add({
                 "util": "lodash"
-            }).load().done(function () {
+            }).load(function () {
                 var _ = ya.get('util', 'lodash');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
@@ -120,7 +120,7 @@ module.exports = [
             var ya = new yanpm();
             ya.add({
                 "util": ["lodash"]
-            }).load().done(function () {
+            }).load(function () {
                 var _ = ya.get('util', 'lodash');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
@@ -143,7 +143,7 @@ module.exports = [
                         "args": [1234]
                     }
                 }
-            }).load().done(function () {
+            }).load(function () {
                 var numeral = ya.get('util', 'numeral');
                 expect(numeral).to.not.be.null;
                 expect(numeral).to.be.a('function');
@@ -165,10 +165,10 @@ module.exports = [
                 "util": {
                     "glob": {
                         "package": "glob",
-                        "args": ["../**/add.js"]
+                        "args": ["../**/advanced.js"]
                     }
                 }
-            }).load().done(function () {
+            }).load(function () {
                 var glob = ya.get('util', 'glob');
                 expect(glob).to.not.be.null;
                 expect(glob).to.be.a('function');
@@ -176,7 +176,7 @@ module.exports = [
                     expect(err).to.be.null;
                     //console.log('files:', files);
                     expect(files).to.be.a('array');
-                    expect(files[0]).to.equal("../_partial-tests/add.js");
+                    expect(files[0]).to.equal("../tests/advanced.js");
                     if (done) done();
                 });
             });
@@ -195,7 +195,7 @@ module.exports = [
                         "factory": function(numeral){ return numeral(1234); }
                     }
                 }
-            }).load().done(function () {
+            }).load(function () {
                 var num = ya.get('util', 'numeral');
 
                 expect(num).to.be.a('object');
@@ -211,7 +211,7 @@ module.exports = [
         func: function (yanpm, done) {
             expect(yanpm).to.not.be.null;
             var ya = new yanpm();
-            ya.add(['numeral']).load().done(function () {
+            ya.add(['numeral']).load(function () {
                 var numeral = ya.get('numeral');
                 expect(numeral).to.not.be.null;
                 expect(numeral).to.be.a('function');
@@ -235,7 +235,7 @@ module.exports = [
                     "name":    "num",
                     "package": "numeral"
                 }
-            ]).load().done(function () {
+            ]).load(function () {
                 var numeral = ya.get('util', 'num');
                 expect(numeral).to.not.be.null;
                 expect(numeral).to.be.a('function');
@@ -262,7 +262,7 @@ module.exports = [
                         return numeral(1234);
                     }
                 }
-            ]).load().done(function () {
+            ]).load(function () {
                 var num = ya.get('num');
                 expect(num).to.be.a('object');
                 expect(num.format("0,0")).to.equal("1,234");
@@ -286,7 +286,7 @@ module.exports = [
                     },
                     "args": [1234]
                 }
-            ]).load().done(function () {
+            ]).load(function () {
                 var num = ya.get('num');
                 expect(num).to.be.a('object');
                 expect(num.format("0,0")).to.equal("1,234");
@@ -307,7 +307,7 @@ module.exports = [
                     "name":    "num",
                     "package": "numeral"
                 }
-            ]).load().done(function () {
+            ]).load(function () {
                 var numeral = ya.get('util', 'num', [1234]);
                 expect(numeral).to.not.be.null;
                 expect(numeral).to.be.a('function');
@@ -335,7 +335,7 @@ module.exports = [
                     "group":   "util",
                     "package": "numeral"
                 }
-            ]).load().done(function () {
+            ]).load(function () {
                 // first item should be default
                 var _ = ya.getDefault('util');
                 expect(_).to.not.be.null;
@@ -361,7 +361,7 @@ module.exports = [
                     "package": "numeral",
                     "default": true
                 }
-            ]).load().done(function () {
+            ]).load(function () {
                 // second item should be set to default
                 var numeral = ya.getDefault('util');
                 expect(numeral).to.not.be.null;
@@ -389,7 +389,7 @@ module.exports = [
                     "group":   "util",
                     "package": "numeral"
                 }
-            ]).load().done(function () {
+            ]).load(function () {
                 // set default to second item
                 ya.setDefault('util', 'numeral');
                 var numeral = ya.getDefault('util');
@@ -419,7 +419,7 @@ module.exports = [
                     "group":   "util",
                     "package": "numeral@1.5.3"
                 }
-            ]).load().done(function () {
+            ]).load(function () {
                 var plugins = ya.getAll('util');
                 var numeral = plugins.numeral;
 
@@ -433,6 +433,45 @@ module.exports = [
 
                 ya.reset();
                 if (done) done();
+            });
+        }
+    },
+    // --------------------------------------------------------------------------
+    {
+        name: "loading file",
+        func: function (yanpm, done) {
+            expect(yanpm).to.not.be.null;
+            var ya = new yanpm();
+
+            ya.add("./_lodash.json").load(function(){
+
+                var _ = ya.get('util', 'lodash');
+                expect(_).to.not.be.null;
+                expect(_).to.be.a('function');
+                expect(_.VERSION).to.be.a('string');
+                //console.log('VERSION:', _.VERSION);
+
+                ya.reset();
+                if(done) done();
+            });
+        }
+    },
+    {
+        name: "loading files",
+        func: function (yanpm, done) {
+            expect(yanpm).to.not.be.null;
+            var ya = new yanpm();
+
+            ya.add(["./_lodash.js"]).load(function(){
+
+                var _ = ya.get('util', '_');
+                expect(_).to.not.be.null;
+                expect(_).to.be.a('function');
+                expect(_.VERSION).to.be.a('string');
+                //console.log('VERSION:', _.VERSION);
+
+                ya.reset();
+                if(done) done();
             });
         }
     }

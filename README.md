@@ -23,12 +23,12 @@ This allows for frameworks (e.g. yanpm) to have default core plugins that swappe
 # Basic usage
 ```javascript
 plugin
-    .add(['lodash', 'moment'])
-    .run()
-    .done(function(plugins){
+    .add('lodash')
+    .load()
+    .done(function(){
         console.log('Done loading plugins');
 
-        var _ = plugins.get('lodash');
+        var _ = plugin.get('lodash');
         console.log("lodash version:", _.VERSION);
     });
 ```
@@ -123,12 +123,13 @@ plugin
         "group": "util",
         "package": "stumpy@0.6.x",
         "factory": function (Stumpy) { return new Stumpy(); }
-    }
+    },
+    'lodash.json', // load file data
+    './stumpy.js'  // load file data
     ]);
 ```
 
-# Roadmap features
-```javascript
+<!--
 plugin
     .add([
     {
@@ -209,4 +210,4 @@ plugin
         }
     }
     ]);
-```
+-->

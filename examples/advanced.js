@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var yanpm = require('../../index.js');
+var yanpm = require('../index.js');
 var ya  = new yanpm();
 
 var startTime = process.hrtime();
@@ -77,55 +77,53 @@ ya
     //        }
     //    }
     //}])
-    // require plugins
-    .load()
-    // all done with requires
-    .done(function(plugins){
-        console.log('Done loading plugins');
+    // require plugins, all done with requires
+    .load(function(){
+        console.log('Done loading ya');
 
         var diff = process.hrtime(startTime);
         var diffSeconds = (diff[0] * 1e9 + diff[1])/(1e9);
         console.log('Time Diff:', diffSeconds);
 
-        var _1 = plugins.get('lodash');
+        var _1 = ya.get('lodash');
         console.log("lodash 1 version:", _1.VERSION);
 
-        var _2 = plugins.get('_');
+        var _2 = ya.get('_');
         console.log("lodash 2 version:", _2.VERSION);
 
-        var _3 = plugins.get('util', '_');
+        var _3 = ya.get('util', '_');
         console.log("lodash 3 version:", _3.VERSION);
 
-        var _4 = plugins.get('util', 'lodash');
+        var _4 = ya.get('util', 'lodash');
         console.log("lodash 4 version:", _4.VERSION);
 
-        var logger1 = plugins.get('util', 'logger1');
+        var logger1 = ya.get('util', 'logger1');
         logger1.log('Stumpy logger 1');
 
-        var logger2 = plugins.get('util', 'logger2');
+        var logger2 = ya.get('util', 'logger2');
         logger2.log('Stumpy logger 2');
 
-        var logger3 = plugins.getDefault('logger');
+        var logger3 = ya.getDefault('logger');
         logger3.log('Stumpy logger 3');
 
         // pass args to factory
-        var logger1New = plugins.get('util', 'logger1', ["logger1New", { showLogId: true, showLogType: true} ]);
+        var logger1New = ya.get('util', 'logger1', ["logger1New", { showLogId: true, showLogType: true} ]);
         logger1New.log('Stumpy logger 1 new');
 
 
-        var loggers = plugins.getAll('util');
+        var loggers = ya.getAll('util');
         loggers.logger1.log('Stumpy logger 1 new new');
 
 
-        plugins.setDefault('util', 'logger2');
-        var logger2New = plugins.getDefault('util');
+        ya.setDefault('util', 'logger2');
+        var logger2New = ya.getDefault('util');
         logger2New.log('Stumpy logger 2 new');
 
 
-        var moment = plugins.get('moment');
+        var moment = ya.get('moment');
         logger1New.log('moment time:', moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 
-        var numeral = plugins.get('numeral');
+        var numeral = ya.get('numeral');
         logger1New.log('numeral time diff:', numeral(diffSeconds).format('0,0.00'));
 
         process.exit();
