@@ -1,6 +1,6 @@
 {
   "name": "yanpm",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Yet Another Node Plugin/Package Manager",
   "keywords": [
     "node.js",
