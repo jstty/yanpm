@@ -24,8 +24,7 @@ This allows for frameworks (e.g. yanpm) to have default core plugins that swappe
 ```javascript
 plugin
     .add('lodash')
-    .load()
-    .done(function(){
+    .load(function(){
         console.log('Done loading plugins');
 
         var _ = plugin.get('lodash');
