@@ -21,15 +21,15 @@
     "web": "http://www.jstty.com"
   },
   "dependencies": {
-    "npm": "^2.13.2",
+    "npm": "^2.x",
     "q": "^1.4.1"
   },
   "devDependencies": {
-    "chai": "~3.2.0",
+    "chai": "~3.5.0",
     "coveralls": "^2.11.3",
-    "istanbul": "^0.3.17",
-    "mocha": "~2.2.5",
-    "shelljs": "^0.5.1"
+    "istanbul": "^0.4.2",
+    "mocha": "~2.4.5",
+    "shelljs": "^0.6.0"
   },
   "engines": {
     "npm" : "<3.0"
