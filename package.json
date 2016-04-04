@@ -1,6 +1,6 @@
 {
   "name": "yanpm",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Yet Another Node Plugin/Package Manager",
   "keywords": [
     "node.js",
@@ -30,6 +30,9 @@
     "istanbul": "^0.3.17",
     "mocha": "~2.2.5",
     "shelljs": "^0.5.1"
+  },
+  "engines": {
+    "npm" : "<3.0"
   },
   "scripts": {
     "test": "istanbul --config=test/.istanbul.yml cover _mocha -- --check-leaks -t 5000 -b -R spec test/tests.js",

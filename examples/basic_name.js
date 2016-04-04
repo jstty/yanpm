@@ -4,17 +4,16 @@ var yanpm = require('../index.js');
 var ya  = new yanpm();
 
 ya
-    .add("./_lodash.json")
-    .add(["./_stumpy.js"])
+    // add plugins
+    .add("_", "lodash@3.9.0")
     // require plugins, all done with requires
     .load().then(function(){
         console.log('Done loading plugins');
 
-        var _ = ya.get('util', 'lodash');
+        var _ = ya.get('_');
         console.log("lodash version:", _.VERSION);
 
-        var logger = ya.get('util', 'stumpy');
-        logger.log("This is a test");
+        ya.reset();
 
         process.exit();
     });

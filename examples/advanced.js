@@ -78,12 +78,12 @@ ya
     //    }
     //}])
     // require plugins, all done with requires
-    .load(function(){
+    .load().then(function(){
         console.log('Done loading ya');
 
         var diff = process.hrtime(startTime);
         var diffSeconds = (diff[0] * 1e9 + diff[1])/(1e9);
-        console.log('Time Diff:', diffSeconds);
+        console.log('Time Diff: %d sec', diffSeconds);
 
         var _1 = ya.get('lodash');
         console.log("lodash 1 version:", _1.VERSION);

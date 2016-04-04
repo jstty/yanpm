@@ -17,8 +17,20 @@ Config based Plugin manager to load dependencies at run time.
 This allows for frameworks (e.g. yanpm) to have default core plugins that swapped out later but without added bloat.
 
 # TODO
+    [ ] npm 3+ support
+    [ ] remove npm module as dependancy
+    [ ] Hide/Handle NPM console message
+    [ ] change to singleton
+    [ ] promise style return on .load
+        [ ] return ya in done/then
+    [ ] proper private repo support
+    [ ] only require modules on .get
+    [ ] change root level .get to install/fetch package return promise
+    [ ] expose require remove cache utils
+    [ ] simply config
     [ ] Better Readme
-    [/] Hide/Handle NPM console message
+    [ ] logo
+    [ ] website
 
 # Basic usage
 ```javascript

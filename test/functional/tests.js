@@ -1,12 +1,14 @@
 var path  = require('path');
+var common  = require('../util/common.js');
+var expect  = common.expect;
 
 require('shelljs/global');
 
 var rootDir = __dirname;
 //console.log("root dir:", rootDir, "\n");
-var timeoutSec = 200;
+var timeoutSec = 300;
 
-var list = require('./tests-list.json');
+var list = require('./tests-list.js');
 
 // increase listener limit
 process.setMaxListeners(0);
@@ -23,41 +25,50 @@ listKeys.forEach(function(item){
         // iterate over all tests in group
         var names = Object.keys(testList);
         names.forEach(function(name) {
+            var fileName = testList[name];
 
             describe(name, function() {
                 // create sub-group for each test
                 var dir = path.join(rootDir, '.' + path.sep + item);
-                var file = path.join(dir + path.sep + name +'.js');
+                var file = path.join(dir + path.sep + fileName +'.js');
                 //console.log("example test dir:", dir, ", file:", file);
                 var tests = require(file);
                 process.chdir(dir);
 
-                var yanpm = null;
+                var ya = null;
                 beforeEach(function(done){
-                    // ensure cache is clear
-                    delete require.cache['../../index.js'];
 
                     //console.log("beforeEach:", name, ', cwd:', process.cwd());
-                    setTimeout(function(){
-                        yanpm = require('../../index.js');
+                    rm('-rf', process.cwd()+'/node_modules');
 
-                        rm('-rf', './node_modules');
+                    setTimeout(function(){
+                        if(!ya) {
+                            var yanpm = require('../../index.js');
+                            ya = new yanpm();
+                        }
+
                         done();
-                    }, timeoutSec);
+                    }, 500);
                 });
 
                 afterEach(function(done){
                     //console.log("afterEach", name, ', cwd:', process.cwd());
+                    rm('-rf', process.cwd()+'/node_modules');
+
                     setTimeout(function(){
-                        rm('-rf', './node_modules');
+                        ya.reset();
+
                         done();
-                    }, timeoutSec);
+                    }, 500);
                 });
 
                 // iterated over all sub-tests for a single group test
                 tests.forEach(function(test) {
                     it("Test "+(test.name), function(done) {
-                        test.func(yanpm, done);
+                        console.log("running test:", test.name);
+                        expect(ya).to.not.be.null;
+
+                        test.func(ya, done);
                     });
                 });
             });
