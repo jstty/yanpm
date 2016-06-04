@@ -32,8 +32,11 @@ This allows for frameworks (e.g. yanpm) to have default core plugins that swappe
     [x] promise style return on .install (use to be .load)
     [x] proper private repo support
 
-# Basic usage
+# using install
 ```javascript
+var yanpm  = require('yanpm');
+var plugin = new yanpm();
+
 plugin
     .install('lodash')
     .then(function(){
@@ -44,8 +47,11 @@ plugin
     });
 ```
 
-# Basic usage
+# using add
 ```javascript
+var yanpm  = require('yanpm');
+var plugin = new yanpm();
+
 plugin
     .add(['lodash', 'stumpy'])
     .install()
@@ -53,6 +59,30 @@ plugin
         console.log('Done loading plugins');
 
         var _ = plugin.get('lodash');
+        console.log("lodash version:", _.VERSION);
+    });
+```
+
+# yanpm config
+```javascript
+var yanpm  = require('yanpm');
+var stumpy  = require('stumpy');
+var plugin = new yanpm({
+ cwd: './', // current dir yanpm will use for the installs
+ logger: new stumpy()); // logger yanpm will use
+});
+
+// WARN!
+// yanpm uses your current NPM under the hood
+// in some cases when trying to install in a dir
+// if "package.json" is missing npm will search up the tree
+
+plugin
+    .install('_', 'lodash'])
+    .then(function(){
+        console.log('Done loading plugins');
+
+        var _ = plugin.get('_');
         console.log("lodash version:", _.VERSION);
     });
 ```
