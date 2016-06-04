@@ -1,12 +1,11 @@
 sudo: false
 language: node_js
 node_js:
+  - "6.2"
+  - "5.11"
+  - "4.4"
   - "0.12"
-  - "0.11"
   - "0.10"
-  - "iojs"
-  - "iojs-v1.0.4"
-  - "4.2"
 
 after_script:
   - npm run-script coveralls

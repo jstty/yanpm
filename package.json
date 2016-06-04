@@ -21,7 +21,7 @@
     "web": "http://www.jstty.com"
   },
   "dependencies": {
-    "q": "^1.4.1"
+    "q": "^2.0.3"
   },
   "devDependencies": {
     "chai": "~3.5.0",
