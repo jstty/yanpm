@@ -5,10 +5,13 @@ var ya  = new yanpm();
 
 ya
     // add plugins
-    //.add("ssh+git@github.com:lodash/lodash.git")
-    .add("https://github.com/lodash/lodash.git#3.9.0")
+    .add([
+        "stumpy",
+        "https://github.com/lodash/lodash.git#3.9.0"
+    ])
     // require plugins, all done with requires
-    .load().then(function(){
+    .install()
+    .then(function(){
         console.log('Done loading plugins');
 
         //var _ = require('lodash');

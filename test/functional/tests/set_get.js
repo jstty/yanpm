@@ -12,8 +12,8 @@ module.exports = [
                     "name":    "num",
                     "package": "numeral"
                 }
-            ]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var numeral = ya.get('util', 'num', [1234]);
                 expect(numeral).to.not.be.null;
@@ -40,8 +40,8 @@ module.exports = [
                     "group":   "util",
                     "package": "numeral"
                 }
-            ]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 // first item should be default
                 var _ = ya.getDefault('util');
@@ -68,8 +68,8 @@ module.exports = [
                     "package": "numeral",
                     "default": true
                 }
-            ]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 // second item should be set to default
                 var numeral = ya.getDefault('util');
@@ -96,8 +96,8 @@ module.exports = [
                     "group":   "util",
                     "package": "numeral"
                 }
-            ]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 // set default to second item
                 ya.setDefault('util', 'numeral');
@@ -126,8 +126,8 @@ module.exports = [
                     "group":   "util",
                     "package": "numeral@1.5.3"
                 }
-            ]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var plugins = ya.getAll('util');
                 var numeral = plugins.numeral;

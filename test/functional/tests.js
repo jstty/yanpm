@@ -33,18 +33,20 @@ listKeys.forEach(function(item){
                 var file = path.join(dir + path.sep + fileName +'.js');
                 //console.log("example test dir:", dir, ", file:", file);
                 var tests = require(file);
-                process.chdir(dir);
+                //process.chdir(dir);
 
                 var ya = null;
                 beforeEach(function(done){
 
                     //console.log("beforeEach:", name, ', cwd:', process.cwd());
-                    rm('-rf', process.cwd()+'/node_modules');
+                    rm('-rf', dir+'/node_modules');
 
                     setTimeout(function(){
                         if(!ya) {
                             var yanpm = require('../../index.js');
-                            ya = new yanpm();
+                            ya = new yanpm({
+                                cwd: dir
+                            });
                         }
 
                         done();
@@ -53,7 +55,7 @@ listKeys.forEach(function(item){
 
                 afterEach(function(done){
                     //console.log("afterEach", name, ', cwd:', process.cwd());
-                    rm('-rf', process.cwd()+'/node_modules');
+                    rm('-rf', dir+'/node_modules');
 
                     setTimeout(function(){
                         ya.reset();

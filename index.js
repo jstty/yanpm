@@ -3,4 +3,4 @@
  */
 'use strict';
 
-module.exports = require('./lib/manager.js');
+module.exports = require('./lib/yanpm.js');

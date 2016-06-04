@@ -2,13 +2,13 @@ var common  = require('../../util/common.js');
 var expect  = common.expect;
 
 module.exports = [
-    // -------------------------------------
+    //-------------------------------------
     {
         name: "private repo",
         func: function (ya, done) {
             //console.log('TEST dirname:', __dirname, ", cwd:", process.cwd());
-            ya.add("https://github.com/lodash/lodash.git#3.9.0").load().then(function(){
-                expect( ya.error() ).to.be.null;
+            ya.add("https://github.com/lodash/lodash.git#3.9.0").install().then(function(){
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('lodash');
                 expect(_).to.not.be.null;
@@ -16,6 +16,34 @@ module.exports = [
                 expect(_.VERSION).to.be.a('string');
                 expect(_.VERSION).to.equal('3.9.0');
                 //console.log('VERSION:', _.VERSION);
+
+                if(done) done();
+            }, function(err){
+                console.error('Error:', err);
+                expect( err ).to.be.null;
+
+                if(done) done();
+            });
+        }
+    },
+    // -------------------------------------
+    {
+        name: "use install to pass configs",
+        func: function (ya, done) {
+            //console.log('TEST dirname:', __dirname, ", cwd:", process.cwd());
+            ya.install("lodash").then(function(){
+                expect( ya.errors() ).to.be.null;
+
+                var _ = ya.get('lodash');
+                expect(_).to.not.be.null;
+                expect(_).to.be.a('function');
+                expect(_.VERSION).to.be.a('string');
+                //console.log('VERSION:', _.VERSION);
+
+                if(done) done();
+            }, function(err){
+                console.error('Error:', err);
+                expect( err ).to.be.null;
 
                 if(done) done();
             });
@@ -26,8 +54,8 @@ module.exports = [
         name: "args - * group, name and package the same",
         func: function (ya, done) {
             //console.log('TEST dirname:', __dirname, ", cwd:", process.cwd());
-            ya.add("lodash").load().then(function(){
-                    expect( ya.error() ).to.be.null;
+            ya.add("lodash").install().then(function(){
+                    expect( ya.errors() ).to.be.null;
 
                     var _ = ya.get('lodash');
                     expect(_).to.not.be.null;
@@ -36,14 +64,19 @@ module.exports = [
                     //console.log('VERSION:', _.VERSION);
 
                     if(done) done();
-                });
+                }, function(err){
+                console.error('Error:', err);
+                expect( err ).to.be.null;
+
+                if(done) done();
+            });
         }
     },
     {
         name: "args - * group, custom name and version package",
         func: function (ya, done) {
-            ya.add("_", "lodash@3.9.0").load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ya.add("_", "lodash@3.9.0").install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('_');
                 expect(_).to.not.be.null;
@@ -53,31 +86,41 @@ module.exports = [
                 //console.log('VERSION:', _.VERSION);
 
                 if (done) done();
+            }, function(err){
+                console.error('Error:', err);
+                expect( err ).to.be.null;
+
+                if(done) done();
             });
         }
     },
     {
         name: "args - util group, custom name and version package",
         func: function (ya, done) {
-            ya.add("util", "_", "lodash@3.8.0").load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ya.add("util", "_", "lodash@3.9.0").install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('util', '_');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
                 expect(_.VERSION).to.be.a('string');
-                expect(_.VERSION).to.equal('3.8.0');
+                expect(_.VERSION).to.equal('3.9.0');
                 //console.log('VERSION:', _.VERSION);
 
                 if (done) done();
+            }, function(err){
+                console.error('Error:', err);
+                expect( err ).to.be.null;
+
+                if(done) done();
             });
         }
     },
     {
         name: "args - util group, array of packages/names",
         func: function (ya, done) {
-            ya.add("util", ["lodash"]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ya.add("util", ["lodash"]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('util', 'lodash');
                 expect(_).to.not.be.null;
@@ -95,8 +138,8 @@ module.exports = [
                 "_": {
                     "package": "lodash"
                 }
-            }).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            }).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('util', '_');
                 expect(_).to.not.be.null;
@@ -114,8 +157,8 @@ module.exports = [
         func: function (ya, done) {
             ya.add({
                 "util": "lodash"
-            }).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            }).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('util', 'lodash');
                 expect(_).to.not.be.null;
@@ -132,8 +175,8 @@ module.exports = [
         func: function (ya, done) {
             ya.add({
                 "util": ["lodash"]
-            }).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            }).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('util', 'lodash');
                 expect(_).to.not.be.null;
@@ -155,8 +198,8 @@ module.exports = [
                         "args": [1234]
                     }
                 }
-            }).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            }).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var numeral = ya.get('util', 'numeral');
                 expect(numeral).to.not.be.null;
@@ -180,8 +223,8 @@ module.exports = [
     //                    "args": ["../**/advanced.js"]
     //                }
     //            }
-    //        }).load().then(function () {
-    //            expect( ya.error() ).to.be.null;
+    //        }).install().then(function () {
+    //            expect( ya.errors() ).to.be.null;
     //
     //            var glob = ya.get('util', 'glob');
     //            expect(glob).to.not.be.null;
@@ -207,8 +250,8 @@ module.exports = [
                         "factory": function(numeral){ return numeral(1234); }
                     }
                 }
-            }).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            }).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var num = ya.get('util', 'numeral');
 
@@ -223,8 +266,8 @@ module.exports = [
     {
         name: "array - string package name",
         func: function (ya, done) {
-            ya.add(['numeral']).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ya.add(['numeral']).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var numeral = ya.get('numeral');
                 expect(numeral).to.not.be.null;
@@ -247,8 +290,8 @@ module.exports = [
                     "name":    "num",
                     "package": "numeral"
                 }
-            ]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var numeral = ya.get('util', 'num');
                 expect(numeral).to.not.be.null;
@@ -274,8 +317,8 @@ module.exports = [
                         return numeral(1234);
                     }
                 }
-            ]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var num = ya.get('num');
                 expect(num).to.be.a('object');
@@ -298,8 +341,8 @@ module.exports = [
                     },
                     "args": [1234]
                 }
-            ]).load().then(function () {
-                expect( ya.error() ).to.be.null;
+            ]).install().then(function () {
+                expect( ya.errors() ).to.be.null;
 
                 var num = ya.get('num');
                 expect(num).to.be.a('object');
@@ -313,8 +356,8 @@ module.exports = [
     {
         name: "loading file",
         func: function (ya, done) {
-            ya.add("./_lodash.json").load().then(function(){
-                expect( ya.error() ).to.be.null;
+            ya.add("./_lodash.json").install().then(function(){
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('util', 'lodash');
                 expect(_).to.not.be.null;
@@ -329,8 +372,8 @@ module.exports = [
     {
         name: "loading files",
         func: function (ya, done) {
-            ya.add(["./_lodash.js"]).load().then(function(){
-                expect( ya.error() ).to.be.null;
+            ya.add(["./_lodash.js"]).install().then(function(){
+                expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('util', '_');
                 expect(_).to.not.be.null;

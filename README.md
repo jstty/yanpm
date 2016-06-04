@@ -35,9 +35,21 @@ This allows for frameworks (e.g. yanpm) to have default core plugins that swappe
 # Basic usage
 ```javascript
 plugin
-    .add('lodash')
-    .load()
-    .done(function(){
+    .install('lodash')
+    .then(function(){
+        console.log('Done loading plugins');
+
+        var _ = plugin.get('lodash');
+        console.log("lodash version:", _.VERSION);
+    });
+```
+
+# Basic usage
+```javascript
+plugin
+    .add(['lodash', 'stumpy'])
+    .install()
+    .then(function(){
         console.log('Done loading plugins');
 
         var _ = plugin.get('lodash');

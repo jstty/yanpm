@@ -7,20 +7,14 @@ var expect  = common.expect;
 // --------------------------------------------------------------------------
 module.exports = [
     {
-        name: "callback error",
-        func: function (ya, done) {
-            ya.load().then(function(){
-                expect( ya.error() ).to.be.null;
-
-                if(done) done();
-            });
-        }
-    },
-    {
         name: "invalid file error",
         func: function (ya, done) {
-            ya.add(["./_lodash-not-found.js"]).load().then(function(){
-                expect( ya.error() ).not.to.be.null;
+            ya.add(["./_lodash-not-found.js"]).install().then(function(){
+                expect( ya.errors() ).not.to.be.null;
+                if(done) done();
+            }, function(err){
+                console.error('Error:', err);
+                expect( err ).not.to.be.null;
 
                 if(done) done();
             });
@@ -29,8 +23,8 @@ module.exports = [
     {
         name: "set/get errors",
         func: function (ya, done) {
-            ya.add("./_lodash.json").load().then(function(){
-                expect( ya.error() ).to.be.null;
+            ya.add("./_lodash.json").install().then(function(){
+                expect( ya.errors() ).to.be.null;
 
                 ya.setDefault();
                 ya.setDefault('util');
@@ -42,6 +36,11 @@ module.exports = [
                 ya.get('util', 'lodash', 'not-args');
 
                 ya.get('junk', 'no-plugin');
+
+                if(done) done();
+            }, function(err){
+                //console.error('Error:', err);
+                expect( err ).not.to.be.null;
 
                 if(done) done();
             });
@@ -60,7 +59,12 @@ module.exports = [
                 {
                     package: null
                 }
-            ]).load().then(function(){
+            ]).install().then(function(){
+                if(done) done();
+            }, function(err){
+                //console.error('Error:', err);
+                expect( err ).not.to.be.null;
+
                 if(done) done();
             });
         }
