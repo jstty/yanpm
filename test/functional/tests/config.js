@@ -49,6 +49,27 @@ module.exports = [
             });
         }
     },
+    {
+        name: "use install for modules where one name is a substring of the other (e.g. lod, lodash)",
+        func: function (ya, done) {
+            ya.add(['lod', 'lodash']);
+            ya.install().then(function(){
+                expect( ya.errors() ).to.be.null;
+
+                var lod = ya.get('lod');
+                var lodash = ya.get('lodash');
+
+                expect(lod).to.not.be.null;
+                expect(lodash).to.not.be.null;
+                expect(lod).to.not.equal(lodash);
+
+                if(done) done();
+            }).catch(function(err){
+                console.error('Error:', err);
+                if(done) done(err);
+            });
+        }
+    },
     // -------------------------------------
     {
         name: "args - * group, name and package the same",
