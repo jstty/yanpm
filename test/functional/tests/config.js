@@ -49,6 +49,24 @@ module.exports = [
             });
         }
     },
+    {
+        name: "use install for modules with post-install scripts (e.g. electron, sqlite3)",
+        func: function(ya, done) {
+            ya.install("electron").then(function(){
+                expect( ya.errors() ).to.be.null;
+
+                var electron = ya.get('electron');
+                expect(electron).to.not.be.null;
+
+                if (done) done();
+            }, function(err){
+                console.error('Error:', err);
+                expect( err ).to.be.null;
+
+                if(done) done();
+            });
+        }
+    },
     // -------------------------------------
     {
         name: "args - * group, name and package the same",
