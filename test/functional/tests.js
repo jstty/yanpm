@@ -38,8 +38,10 @@ listKeys.forEach(function(item){
                 var ya = null;
                 beforeEach(function(done){
 
-                    //console.log("beforeEach:", name, ', cwd:', process.cwd());
+                    // console.log("beforeEach:", name, ', cwd:', process.cwd(), ', dir:', dir);
                     rm('-rf', dir+'/node_modules');
+                    rm(dir+'/package-lock.json');
+                    cp(rootDir+'/template-package.json', dir+'/package.json');
 
                     setTimeout(function(){
                         if(!ya) {
@@ -50,7 +52,7 @@ listKeys.forEach(function(item){
                         }
 
                         done();
-                    }, 500);
+                    }, 200);
                 });
 
                 afterEach(function(done){

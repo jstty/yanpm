@@ -96,14 +96,14 @@ module.exports = [
     {
         name: "args - * group, custom name and version package",
         func: function (ya, done) {
-            ya.add("_", "lodash@4.0.0").install().then(function () {
+            ya.add("_", "lodash@3.9.0").install().then(function () {
                 expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('_');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
                 expect(_.VERSION).to.be.a('string');
-                expect(_.VERSION).to.equal('4.0.0');
+                expect(_.VERSION).to.equal('3.9.0');
                 //console.log('VERSION:', _.VERSION);
 
                 if (done) done();
