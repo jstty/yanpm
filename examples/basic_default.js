@@ -13,7 +13,7 @@ ya
             "group":   "util",
             "package": "numeral"
         }
-    ]).load().then(function () {
+    ]).install().then(function () {
         console.log('Done loading plugins');
 
         var _ = ya.getDefault('util');

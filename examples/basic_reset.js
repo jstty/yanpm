@@ -20,7 +20,7 @@ function test() {
 
     ya.add(list[count])
     // require plugins, all done with requires
-    .load().then(function(){
+    .install().then(function(){
         var diff = process.hrtime(startTime);
         var diffSeconds = (diff[0] * 1e9 + diff[1])/(1e9);
         console.log('Time Diff: %d sec', diffSeconds);

@@ -17,12 +17,14 @@ Config based Plugin manager to load dependencies at run time.
 This allows for frameworks (e.g. yanpm) to have default core plugins that swapped out later but without added bloat.
 
 # TODO
-    [?] change to singleton
-    [ ] better Readme
+    [ ] run sync mode
     [?] better name
     [ ] logo
+    [?] change to singleton
+    [ ] smart install, to prevent git repo from auto resintall every time it's ran
     [ ] only require modules on .get
-    [ ] expose require remove cache utils
+    [ ] better Readme
+    [ ] move require remove cache utils to it's own project
     [ ] website
 
 # v1.0.0 - Release

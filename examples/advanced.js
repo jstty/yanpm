@@ -78,7 +78,7 @@ ya
     //    }
     //}])
     // require plugins, all done with requires
-    .load().then(function(){
+    .install().then(function(){
         console.log('Done loading ya');
 
         var diff = process.hrtime(startTime);

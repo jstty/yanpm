@@ -2,30 +2,30 @@ var common  = require('../../util/common.js');
 var expect  = common.expect;
 
 module.exports = [
-    //-------------------------------------
-    {
-        name: "private repo",
-        func: function (ya, done) {
-            //console.log('TEST dirname:', __dirname, ", cwd:", process.cwd());
-            ya.add("https://github.com/lodash/lodash.git#3.9.0").install().then(function(){
-                expect( ya.errors() ).to.be.null;
+    // //-------------------------------------
+    // {
+    //     name: "private repo",
+    //     func: function (ya, done) {
+    //         //console.log('TEST dirname:', __dirname, ", cwd:", process.cwd());
+    //         ya.add("https://github.com/lodash/lodash.git#3.9.3").install().then(function(){
+    //             expect( ya.errors() ).to.be.null;
 
-                var _ = ya.get('lodash');
-                expect(_).to.not.be.null;
-                expect(_).to.be.a('function');
-                expect(_.VERSION).to.be.a('string');
-                expect(_.VERSION).to.equal('3.9.0');
-                //console.log('VERSION:', _.VERSION);
+    //             var _ = ya.get('lodash');
+    //             expect(_).to.not.be.null;
+    //             expect(_).to.be.a('function');
+    //             expect(_.VERSION).to.be.a('string');
+    //             expect(_.VERSION).to.equal('3.9.3');
+    //             //console.log('VERSION:', _.VERSION);
 
-                if(done) done();
-            }, function(err){
-                console.error('Error:', err);
-                expect( err ).to.be.null;
+    //             if(done) done();
+    //         }, function(err){
+    //             console.error('Error:', err);
+    //             expect( err ).to.be.null;
 
-                if(done) done();
-            });
-        }
-    },
+    //             if(done) done();
+    //         });
+    //     }
+    // },
     // -------------------------------------
     {
         name: "use install to pass configs",
@@ -50,20 +50,23 @@ module.exports = [
         }
     },
     {
-        name: "use install for modules with post-install scripts (e.g. electron, sqlite3)",
-        func: function(ya, done) {
-            ya.install("electron").then(function(){
+        name: "use install for modules where one name is a substring of the other (e.g. lod, lodash)",
+        func: function (ya, done) {
+            ya.add(['lod', 'lodash']);
+            ya.install().then(function(){
                 expect( ya.errors() ).to.be.null;
 
-                var electron = ya.get('electron');
-                expect(electron).to.not.be.null;
+                var lod = ya.get('lod');
+                var lodash = ya.get('lodash');
 
-                if (done) done();
-            }, function(err){
-                console.error('Error:', err);
-                expect( err ).to.be.null;
+                expect(lod).to.not.be.null;
+                expect(lodash).to.not.be.null;
+                expect(lod).to.not.equal(lodash);
 
                 if(done) done();
+            }).catch(function(err){
+                console.error('Error:', err);
+                if(done) done(err);
             });
         }
     },
@@ -93,14 +96,14 @@ module.exports = [
     {
         name: "args - * group, custom name and version package",
         func: function (ya, done) {
-            ya.add("_", "lodash@3.9.0").install().then(function () {
+            ya.add("_", "lodash@4.0.0").install().then(function () {
                 expect( ya.errors() ).to.be.null;
 
                 var _ = ya.get('_');
                 expect(_).to.not.be.null;
                 expect(_).to.be.a('function');
                 expect(_.VERSION).to.be.a('string');
-                expect(_.VERSION).to.equal('3.9.0');
+                expect(_.VERSION).to.equal('4.0.0');
                 //console.log('VERSION:', _.VERSION);
 
                 if (done) done();

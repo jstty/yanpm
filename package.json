@@ -1,6 +1,6 @@
 {
   "name": "yanpm",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Yet Another Node Plugin/Package Manager",
   "keywords": [
     "node.js",
@@ -21,6 +21,7 @@
     "web": "http://www.jstty.com"
   },
   "dependencies": {
+    "lodash": "^3.9.0",
     "q": "^2.0.3"
   },
   "devDependencies": {
@@ -31,7 +32,7 @@
     "shelljs": "^0.7.0"
   },
   "engines": {
-    "npm" : "<=3.0"
+    "npm": "<=3.0"
   },
   "scripts": {
     "test": "istanbul --config=test/.istanbul.yml cover _mocha -- --check-leaks -t 5000 -b -R spec test/tests.js",

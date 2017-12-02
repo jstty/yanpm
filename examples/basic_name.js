@@ -7,7 +7,7 @@ ya
     // add plugins
     .add("_", "lodash@3.9.0")
     // require plugins, all done with requires
-    .load().then(function(){
+    .install().then(function(){
         console.log('Done loading plugins');
 
         var _ = ya.get('_');
