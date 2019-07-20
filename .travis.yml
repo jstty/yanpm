@@ -1,13 +1,14 @@
 sudo: false
 language: node_js
 node_js:
-  - "9.2"
-  - "8.9"
+  - "12.6"
+  - "11.15"
+  - "10.16"
+  - "9.11"
+  - "8.16"
   - "7.10"
   - "6.12"
-  - "5.12"
-  - "4.8"
-  - "0.12"
+
 
 after_script:
   - npm run-script coveralls

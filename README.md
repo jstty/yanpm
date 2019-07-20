@@ -1,6 +1,5 @@
 # yanpm - Yet Another Node Plugin/Package Manager
 [![Build Status](https://secure.travis-ci.org/jstty/yanpm.png?branch=master)](http://travis-ci.org/jstty/yanpm)
-[![bitHound Score](https://www.bithound.io/github/jstty/yanpm/badges/score.svg?branch=master)](https://www.bithound.io/github/jstty/yanpm)
 [![Coverage Status](https://coveralls.io/repos/jstty/yanpm/badge.svg?service=github&branch=master)](https://coveralls.io/github/jstty/yanpm?branch=master)
 ![License](https://img.shields.io/npm/l/yanpm.svg?branch=master)
 
